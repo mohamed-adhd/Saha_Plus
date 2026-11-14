@@ -1,0 +1,21 @@
+.sp-app-shell { position: relative; z-index: 1; min-height: 100vh; }
+.sp-app-frame { min-height: 100vh; margin-left: 76px; transition: margin var(--duration-medium) var(--ease); }
+.sp-topbar { position: sticky; z-index: 800; top: 0; display: flex; align-items: center; justify-content: space-between; min-height: 68px; gap: 1rem; padding: .65rem clamp(1rem, 3vw, 3rem); border-bottom: 1px solid rgba(111, 154, 91, .23); background: rgba(246, 241, 231, .92); backdrop-filter: blur(12px); }
+.sp-topbar__leading, .sp-topbar__actions { display: flex; align-items: center; gap: .75rem; min-width: 0; }
+.sp-topbar__crumb { display: flex; align-items: center; gap: .65rem; color: var(--muted); font-size: .88rem; }
+.sp-topbar__crumb strong { color: var(--forest-900); font-weight: 600; }
+.sp-topbar__crumb svg, .sp-topbar__icon svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.sp-topbar__brand { color: var(--moss-600); font-weight: 700; }
+.sp-topbar__emergency { display: inline-flex; align-items: center; gap: .5rem; padding: .4rem .75rem; border: 1px solid #e8c6b6; border-radius: var(--radius-pill); color: #7b302a; background: #fae9e2; font-size: .79rem; text-decoration: none; }
+.sp-topbar__emergency-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--status-danger); }
+.sp-topbar__menu { display: none; }
+.sp-content { position: relative; z-index: 1; min-width: 0; }
+@media (max-width: 767.98px) {
+  .sp-app-frame { margin-left: 0; }
+  .sp-topbar { justify-content: flex-start; min-height: 60px; gap: .7rem; padding: .5rem .85rem; }
+  .sp-topbar__menu { display: grid; flex: 0 0 39px; place-items: center; width: 39px; height: 39px; border: 1px solid #cbd9c2; border-radius: 12px; color: var(--forest-800); background: #faf8f0; }
+  .sp-topbar__crumb { flex: 1; min-width: 0; gap: .4rem; overflow: hidden; font-size: .76rem; }
+  .sp-topbar__crumb strong { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .sp-topbar__emergency { gap: .35rem; padding: .42rem .48rem; font-size: .69rem; white-space: nowrap; }
+  .sp-topbar__emergency svg { display: none; }
+}
