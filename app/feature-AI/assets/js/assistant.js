@@ -141,69 +141,6 @@
     document.getElementById('clearConversation').addEventListener('click', () => { messages.replaceChildren(emptyState); history.length = 0; chat.classList.remove('has-started'); emptyState.classList.remove('is-hidden'); try { sessionStorage.removeItem(storageKey); } catch (_) { /* Storage unavailable. */ } input.focus(); });
   }
 
-  const sidebar = document.getElementById('frontSidebar');
-  if (sidebar) {
-    const pin = document.getElementById('sidebarPin');
-    const openButton = document.getElementById('sidebarOpen');
-    const closeButton = document.getElementById('sidebarClose');
-    const backdrop = document.getElementById('sidebarBackdrop');
-    const nav = sidebar.querySelector('.front-nav');
-    let touchStartX = null;
-    const readPinned = () => { try { return localStorage.getItem('sahap-sidebar-pinned') === 'true'; } catch (_) { return false; } };
-    const pinned = readPinned();
-    sidebar.classList.toggle('is-pinned', pinned);
-    pin.setAttribute('aria-pressed', String(pinned));
-    const syncSidebarViewport = () => {
-      const mobile = window.innerWidth < 768;
-      if (mobile && !sidebar.classList.contains('is-open')) { sidebar.inert = true; sidebar.setAttribute('aria-hidden', 'true'); }
-      else { sidebar.inert = false; sidebar.removeAttribute('aria-hidden'); }
-      if (!mobile && sidebar.classList.contains('is-open')) {
-        sidebar.classList.remove('is-open'); backdrop.classList.remove('is-visible'); backdrop.hidden = true;
-        openButton.setAttribute('aria-expanded', 'false');
-      }
-    };
-    const updateIndicator = () => {
-      const active = nav.querySelector('.front-nav__item.is-active');
-      const indicator = nav.querySelector('.front-nav__indicator');
-      if (!active || !indicator) return;
-      indicator.style.transform = `translateY(${active.offsetTop}px)`;
-      indicator.style.height = `${active.offsetHeight}px`;
-      nav.classList.add('has-active');
-    };
-    const closeDrawer = () => {
-      sidebar.classList.remove('is-open'); backdrop.classList.remove('is-visible'); backdrop.hidden = true;
-      openButton.setAttribute('aria-expanded', 'false');
-      if (window.innerWidth < 768) { sidebar.inert = true; sidebar.setAttribute('aria-hidden', 'true'); }
-      if (window.innerWidth < 768) openButton.focus();
-    };
-    const openDrawer = () => {
-      sidebar.inert = false; sidebar.removeAttribute('aria-hidden'); sidebar.classList.add('is-open'); backdrop.hidden = false;
-      requestAnimationFrame(() => backdrop.classList.add('is-visible'));
-      openButton.setAttribute('aria-expanded', 'true');
-      closeButton.focus();
-    };
-    pin.addEventListener('click', () => {
-      const next = !sidebar.classList.contains('is-pinned');
-      sidebar.classList.toggle('is-pinned', next); pin.setAttribute('aria-pressed', String(next));
-      try { localStorage.setItem('sahap-sidebar-pinned', String(next)); } catch (_) { /* Pin state remains available for this page. */ }
-    });
-    openButton.addEventListener('click', openDrawer);
-    closeButton.addEventListener('click', closeDrawer);
-    backdrop.addEventListener('click', closeDrawer);
-    document.addEventListener('keydown', (event) => { if (event.key === 'Escape' && sidebar.classList.contains('is-open')) closeDrawer(); });
-    sidebar.addEventListener('touchstart', (event) => { touchStartX = event.changedTouches[0].clientX; }, { passive: true });
-    sidebar.addEventListener('touchend', (event) => {
-      if (touchStartX !== null && touchStartX - event.changedTouches[0].clientX > 55) closeDrawer();
-      touchStartX = null;
-    }, { passive: true });
-    sidebar.querySelectorAll('.front-nav__item').forEach((item) => item.addEventListener('mouseenter', () => {
-      if (item.classList.contains('is-active')) updateIndicator();
-    }));
-    window.addEventListener('resize', () => { syncSidebarViewport(); updateIndicator(); });
-    syncSidebarViewport();
-    requestAnimationFrame(updateIndicator);
-  }
-
   const infoCards = document.querySelectorAll('.assistant-aside details.info-card');
   const syncInfoAccordion = () => infoCards.forEach((card) => { card.open = window.innerWidth >= 992; });
   if (infoCards.length) { syncInfoAccordion(); window.addEventListener('resize', syncInfoAccordion); }
