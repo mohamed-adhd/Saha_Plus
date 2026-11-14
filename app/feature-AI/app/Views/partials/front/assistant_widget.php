@@ -1,0 +1,1 @@
+<a class="assistant-widget" href="<?= htmlspecialchars(base_url('index.php?page=assistant'), ENT_QUOTES, 'UTF-8') ?>" aria-label="Open Saha+ AI Assistant"><span aria-hidden="true">✦</span><span>Ask Saha+</span></a>

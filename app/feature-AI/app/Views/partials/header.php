@@ -1,0 +1,1 @@
+<header class="admin-topbar"><a href="index.php?page=assistant" class="text-decoration-none text-success fw-semibold">Saha+ · Administration</a><span class="small text-secondary">School project prototype</span></header>
