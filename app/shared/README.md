@@ -115,3 +115,39 @@ Available icon names are `home`, `atlas`, `map`, `drop`, `mind`, and `leaf`. Use
 ## Run the demo
 
 From the project root, run `php -S localhost:8000` and visit `http://localhost:8000/shared/demo.php`. Google Fonts and Bootstrap are loaded from their CDNs; local styles and scripts use the shared URL helpers.
+
+## Run the shared part on its own (MVC)
+
+The shared folder is also a small standalone MVC application that shows the common template (Front Office shell + Back Office shell).
+
+```text
+shared/
+├── index.php                      # front controller (router)
+├── app/
+│   ├── routes.php                 # page key => [Controller, method]
+│   ├── Models/Module.php          # the 5 Saha+ modules (owner, entities, status)
+│   ├── Controllers/
+│   │   ├── Controller.php         # renderFront() -> layout_kit.php | render() -> layout.php
+│   │   ├── Front/HomeController.php        # home + coming-soon
+│   │   ├── Front/ComponentsController.php  # UI kit preview
+│   │   └── Back/DashboardController.php    # back office dashboard
+│   └── Views/
+│       ├── layout_kit.php         # Front Office shell
+│       ├── layout.php             # Back Office shell
+│       ├── partials/              # front partials (head, sidebar, topbar, scripts)
+│       ├── partials/back/         # back partials (head, sidebar, header, footer, scripts)
+│       └── pages/front|back/      # page views (HTML only)
+└── assets/css/admin.css           # Back Office layout (fixed sidebar) + theme
+```
+
+| Page | URL |
+|---|---|
+| Home (modules) | `shared/index.php` |
+| UI kit preview | `shared/index.php?page=components` |
+| Back Office dashboard | `shared/index.php?page=dashboard` |
+
+With XAMPP: `http://localhost/<repo>/app/shared/index.php`. With PHP: from `app/`, run `php -S localhost:8000` and open `http://localhost:8000/shared/index.php`.
+
+### Reuse the Back Office shell in a module
+
+Set `$title`, `$currentPage` and optionally `$adminMenu` (`['SECTION' => ['page-key' => 'Label']]`), then call `render('view')` from a controller. The fixed sidebar layout is in `assets/css/admin.css`.

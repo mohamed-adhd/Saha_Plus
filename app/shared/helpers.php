@@ -29,3 +29,11 @@ if (!function_exists('navActive')) {
         return (string)($GLOBALS['currentPage'] ?? '') === $key ? 'active' : '';
     }
 }
+
+if (!function_exists('e')) {
+    /** Escape a value before printing it in HTML. */
+    function e(mixed $value): string
+    {
+        return htmlspecialchars((string)$value, ENT_QUOTES, 'UTF-8');
+    }
+}
