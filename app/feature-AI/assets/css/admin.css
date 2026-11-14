@@ -1,0 +1,48 @@
+/* Shared Saha+ back-office foundation */
+:root {
+  --admin-cream: #f6f1e7;
+  --admin-sand: #ece4d2;
+  --admin-sage-100: #e4eddc;
+  --admin-sage-300: #b7cfa8;
+  --admin-sage-500: #6f9a5b;
+  --admin-moss-600: #3f7a4a;
+  --admin-forest-800: #1f4a35;
+  --admin-forest-900: #12301f;
+  --admin-ink: #1b2a21;
+  --admin-muted: #526b5b;
+  --admin-clay: #c9794a;
+  --admin-triage-info: #347443;
+  --admin-triage-consult: #e0a100;
+  --admin-triage-urgent: #c8453b;
+}
+
+body:has(.admin-sidebar) { color: var(--admin-ink); background: var(--admin-cream); font-family: "DM Sans", "Trebuchet MS", sans-serif; }
+.admin-sidebar { color: var(--admin-cream); background: var(--admin-forest-900); border-color: #315a3e; }
+.admin-brand, .admin-brand span { color: var(--admin-cream); }
+.sidebar-label { color: #c6d6bc; }
+.sidebar-link { color: #e8eee1; }
+.sidebar-link:hover, .sidebar-link.active { color: var(--admin-forest-900); background: var(--admin-sage-100); }
+.admin-topbar { background: #faf8f0; border-color: #d5dfca; }
+.admin-topbar a { color: var(--admin-forest-800) !important; }
+.admin-footer { color: var(--admin-muted); }
+.content-area .card, .content-area .modal-content { border-color: #d5dfca; border-radius: 18px; background: #fbf9f2; box-shadow: 0 7px 22px rgba(31, 74, 53, .07); }
+.content-area .table { --bs-table-bg: transparent; --bs-table-color: var(--admin-ink); --bs-table-border-color: #e2e4d7; }
+.content-area .text-muted { color: var(--admin-muted) !important; }
+.content-area .form-control, .content-area .form-select { border-color: #b9cbae; border-radius: 11px; color: var(--admin-ink); background-color: #fffdf7; }
+.content-area .btn-primary, .content-area .btn-success { --bs-btn-color: #fff; --bs-btn-bg: var(--admin-forest-800); --bs-btn-border-color: var(--admin-forest-800); --bs-btn-hover-bg: var(--admin-moss-600); --bs-btn-hover-border-color: var(--admin-moss-600); }
+.content-area .btn-outline-primary { --bs-btn-color: var(--admin-forest-800); --bs-btn-border-color: var(--admin-moss-600); --bs-btn-hover-color: #fff; --bs-btn-hover-bg: var(--admin-forest-800); --bs-btn-hover-border-color: var(--admin-forest-800); }
+.content-area .btn-outline-secondary { --bs-btn-color: var(--admin-forest-800); --bs-btn-border-color: #879b83; }
+.content-area .triage-badge--informational { color: #fff; background: var(--admin-triage-info); }
+.content-area .triage-badge--consult { color: #302300; background: #f4cf6d; }
+.content-area .triage-badge--urgent { color: #fff; background: #a9322b; }
+.content-area .triage-badge { font-family: "DM Sans", sans-serif; }
+.content-area .triage-panel--informational { border-top: 4px solid var(--admin-triage-info); }
+.content-area .triage-panel--consult { border-top: 4px solid var(--admin-triage-consult); }
+.content-area .triage-panel--urgent { border-top: 4px solid var(--admin-triage-urgent); }
+.content-area .modal-header, .content-area .modal-footer { border-color: #e2e4d7; }
+.content-area .keyword-chip { color: var(--admin-forest-900); background: var(--admin-sage-100); }
+.content-area :focus-visible { outline: 3px solid var(--admin-forest-800); outline-offset: 2px; }
+@media (max-width: 767.98px) {
+  .admin-sidebar { background: var(--admin-forest-900); }
+  .sidebar-link:hover, .sidebar-link.active { color: var(--admin-forest-900); }
+}
