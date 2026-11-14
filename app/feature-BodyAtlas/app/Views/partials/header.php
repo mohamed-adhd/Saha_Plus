@@ -1,0 +1,1 @@
+<header class="admin-topbar"><a href="<?= e(base_url('index.php?page=admin-organs')) ?>" class="text-decoration-none fw-semibold">Saha+ · Administration</a><span class="small text-secondary">School project prototype</span></header>

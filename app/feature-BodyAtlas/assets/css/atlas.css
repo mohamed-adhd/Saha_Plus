@@ -1,0 +1,57 @@
+/* Body Atlas – Front Office styles (built on the shared Saha+ ui-kit tokens) */
+
+.atlas-eyebrow { margin-bottom: .4rem; color: var(--clay); font-size: .78rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
+
+/* System layer toggle */
+.atlas-layers { display: inline-flex; flex-wrap: wrap; gap: .35rem; margin-bottom: 1.5rem; padding: .35rem; border: 1px solid #d3ddc9; border-radius: var(--radius-pill); background: #fbf9f2; }
+.atlas-layer { padding: .5rem 1.05rem; border: 0; border-radius: var(--radius-pill); color: var(--forest-800); background: transparent; font-weight: 600; transition: background var(--duration-fast) var(--ease), color var(--duration-fast) var(--ease); }
+.atlas-layer:hover { background: var(--sage-100); }
+.atlas-layer.is-active { color: #fff; background: var(--forest-800); }
+
+/* Silhouette */
+.atlas-figure { padding: 1.5rem 1rem 1rem; text-align: center; }
+.atlas-svg { display: block; width: 100%; max-width: 300px; height: auto; margin: 0 auto; }
+.atlas-body > * { fill: var(--sage-100); stroke: var(--sage-300); stroke-width: 2; }
+.atlas-hint { margin: .75rem 0 0; color: var(--muted); font-size: .8rem; }
+
+.atlas-hotspot { cursor: pointer; transition: opacity var(--duration-medium) var(--ease); }
+.atlas-hotspot__dot { fill: var(--clay); stroke: #fff; stroke-width: 3; transition: r var(--duration-fast) var(--ease), fill var(--duration-fast) var(--ease); }
+.atlas-hotspot__pulse { fill: var(--clay); opacity: .25; transform-box: fill-box; transform-origin: center; animation: atlas-pulse 2.2s var(--ease) infinite; }
+.atlas-hotspot:hover .atlas-hotspot__dot, .atlas-hotspot:focus-visible .atlas-hotspot__dot, .atlas-hotspot.is-highlighted .atlas-hotspot__dot { r: 10; fill: var(--forest-800); }
+.atlas-hotspot:focus-visible { outline: none; }
+
+/* Only the hotspots / cards of the selected layer are visible */
+.atlas[data-layer="vital"] [data-system]:not([data-system="vital"]),
+.atlas[data-layer="muscular"] [data-system]:not([data-system="muscular"]),
+.atlas[data-layer="nervous"] [data-system]:not([data-system="nervous"]) { display: none; }
+
+@keyframes atlas-pulse { 0%, 100% { transform: scale(.8); opacity: .35; } 50% { transform: scale(1.35); opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .atlas-hotspot__pulse { animation: none; } }
+
+/* Organ cards */
+.atlas-organ-card { display: block; height: 100%; color: inherit; text-decoration: none; transition: transform var(--duration-fast) var(--ease), box-shadow var(--duration-fast) var(--ease); }
+.atlas-organ-card:hover, .atlas-organ-card.is-highlighted { transform: translateY(-3px); box-shadow: var(--shadow-lift); color: inherit; }
+.atlas-organ-card p { color: var(--muted); font-size: .9rem; }
+
+/* Organ page */
+.organ-vital { font-size: 1.45rem; }
+.symptom-tags { display: flex; flex-wrap: wrap; gap: .5rem; }
+.symptom-tag { padding: .5rem 1rem; border: 1px solid var(--sage-300); border-radius: var(--radius-pill); color: var(--forest-800); background: #fffdf7; font-weight: 600; transition: all var(--duration-fast) var(--ease); }
+.symptom-tag:hover { background: var(--sage-100); }
+.symptom-tag[aria-pressed="true"] { border-color: var(--forest-800); color: #fff; background: var(--forest-800); }
+.symptom-summary { margin-top: 1.25rem; padding-top: 1.25rem; border-top: 1px solid #e2e4d7; }
+.symptom-summary ul { margin: 0; padding: 0; list-style: none; display: grid; gap: .6rem; }
+.symptom-summary li { display: flex; align-items: flex-start; gap: .6rem; }
+
+.organ-list { margin: 0 0 1rem; padding-left: 1.1rem; display: grid; gap: .45rem; }
+.organ-prevention { border-top: 4px solid var(--status-info); }
+.organ-redflags { border-top: 4px solid var(--status-danger); }
+.organ-redflags h3 { color: #a9322b; }
+.organ-action { display: block; height: 100%; color: inherit; text-decoration: none; transition: transform var(--duration-fast) var(--ease), box-shadow var(--duration-fast) var(--ease); }
+.organ-action:hover { transform: translateY(-3px); box-shadow: var(--shadow-lift); color: inherit; }
+.organ-action p { color: var(--muted); }
+
+/* Auth pages */
+.auth-wrap { max-width: 560px; margin: 0 auto; }
+.auth-error { min-height: 1em; color: var(--status-danger); }
+.sp-input.is-invalid { border-color: var(--status-danger); }

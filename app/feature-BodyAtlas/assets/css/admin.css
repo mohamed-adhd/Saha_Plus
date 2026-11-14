@@ -1,0 +1,61 @@
+/* Saha+ Back Office – layout + theme (same palette as the shared ui-kit) */
+:root {
+  --admin-sidebar-w: 248px;
+  --admin-cream: #f6f1e7;
+  --admin-sage-100: #e4eddc;
+  --admin-moss-600: #3f7a4a;
+  --admin-forest-800: #1f4a35;
+  --admin-forest-900: #12301f;
+  --admin-ink: #1b2a21;
+  --admin-muted: #526b5b;
+}
+
+/* ---------- Layout: fixed sidebar on the left, content on the right ---------- */
+.admin-body { min-height: 100vh; color: var(--admin-ink); background: var(--admin-cream); font-family: "DM Sans", "Trebuchet MS", sans-serif; }
+.admin-sidebar { position: fixed; inset: 0 auto 0 0; z-index: 1030; display: flex; flex-direction: column; width: var(--admin-sidebar-w); padding: 1.5rem 1rem; overflow-y: auto; color: var(--admin-cream); background: var(--admin-forest-900); }
+.admin-brand { display: block; margin: 0 .5rem 2rem; color: var(--admin-cream); font-family: "Fraunces", Georgia, serif; font-size: 1.6rem; font-weight: 700; text-decoration: none; }
+.admin-brand span { color: #b7cfa8; }
+.admin-brand small { font-family: "DM Sans", sans-serif; font-size: .75rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; opacity: .7; }
+.admin-sidebar nav { display: flex; flex-direction: column; gap: .2rem; }
+.sidebar-label { margin: 0 .75rem .35rem; color: #c6d6bc; font-size: .7rem; font-weight: 700; letter-spacing: .12em; }
+.sidebar-link { display: block; padding: .6rem .75rem; border-radius: 10px; color: #e8eee1; font-weight: 500; text-decoration: none; transition: background .18s, color .18s; }
+.sidebar-link:hover, .sidebar-link.active { color: var(--admin-forest-900); background: var(--admin-sage-100); }
+
+.main-wrapper { position: relative; z-index: 1; min-height: 100vh; margin-left: var(--admin-sidebar-w); } /* above the ui-kit background gradient */
+.main-content { display: flex; flex-direction: column; min-height: 100vh; }
+.admin-topbar { position: sticky; top: 0; z-index: 1020; display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding: 1rem 2rem; border-bottom: 1px solid #d5dfca; background: #faf8f0; }
+.admin-topbar a { color: var(--admin-forest-800); }
+.admin-body .sp-content { flex: 1; padding: 2rem; }
+.admin-footer { padding: 1rem 2rem; color: var(--admin-muted); }
+
+@media (max-width: 991.98px) {
+  .admin-sidebar { position: static; width: 100%; padding: 1rem; }
+  .admin-sidebar nav { flex-direction: row; flex-wrap: wrap; align-items: center; }
+  .admin-sidebar .sidebar-label { display: none; }
+  .admin-brand { margin-bottom: .75rem; }
+  .main-wrapper { margin-left: 0; }
+  .admin-body .sp-content { padding: 1.25rem; }
+}
+
+/* ---------- Components ---------- */
+.content-area .card, .content-area .modal-content { border-color: #d5dfca; border-radius: 18px; background: #fbf9f2; box-shadow: 0 7px 22px rgba(31, 74, 53, .07); }
+.content-area .table { --bs-table-bg: transparent; --bs-table-color: var(--admin-ink); --bs-table-border-color: #e2e4d7; }
+.content-area .text-muted { color: var(--admin-muted) !important; }
+.content-area .form-control, .content-area .form-select { border-color: #b9cbae; border-radius: 11px; color: var(--admin-ink); background-color: #fffdf7; }
+.content-area .btn-primary { --bs-btn-color: #fff; --bs-btn-bg: var(--admin-forest-800); --bs-btn-border-color: var(--admin-forest-800); --bs-btn-hover-bg: var(--admin-moss-600); --bs-btn-hover-border-color: var(--admin-moss-600); }
+.content-area .btn-outline-primary { --bs-btn-color: var(--admin-forest-800); --bs-btn-border-color: var(--admin-moss-600); --bs-btn-hover-color: #fff; --bs-btn-hover-bg: var(--admin-forest-800); --bs-btn-hover-border-color: var(--admin-forest-800); }
+.content-area .btn-outline-secondary { --bs-btn-color: var(--admin-forest-800); --bs-btn-border-color: #879b83; }
+.content-area .modal-header, .content-area .modal-footer { border-color: #e2e4d7; }
+.content-area :focus-visible { outline: 3px solid var(--admin-forest-800); outline-offset: 2px; }
+.admin-search { max-width: 320px; }
+.admin-filter { max-width: 220px; }
+
+.severity-badge, .role-badge { display: inline-block; padding: .25rem .6rem; border-radius: 999px; font-size: .75rem; font-weight: 700; }
+.severity-badge--low { color: #fff; background: #347443; }
+.severity-badge--medium { color: #302300; background: #f4cf6d; }
+.severity-badge--high { color: #fff; background: #a9322b; }
+.role-badge--patient { color: var(--admin-forest-900); background: var(--admin-sage-100); }
+.role-badge--therapist { color: #fff; background: #3f7a4a; }
+.role-badge--admin { color: #fff; background: #12301f; }
+
+.admin-toast { position: fixed; right: 1.5rem; bottom: 1.5rem; z-index: 2000; padding: .75rem 1.1rem; border-radius: 12px; color: #fff; background: var(--admin-forest-800); box-shadow: 0 10px 30px rgba(0, 0, 0, .18); }
