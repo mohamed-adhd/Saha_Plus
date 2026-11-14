@@ -1,0 +1,31 @@
+:root {
+  --cream: #f6f1e7;
+  --sand: #ece4d2;
+  --sage-100: #e4eddc;
+  --sage-300: #b7cfa8;
+  --sage-500: #6f9a5b;
+  --moss-600: #3f7a4a;
+  --forest-800: #1f4a35;
+  --forest-900: #12301f;
+  --ink: #1b2a21;
+  --muted: #66786b;
+  --clay: #c9794a;
+  --status-info: #347443;
+  --status-warn: #e0a100;
+  --status-danger: #c8453b;
+  --focus-ring: #1f4a35;
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 22px;
+  --radius-xl: 28px;
+  --radius-pill: 999px;
+  --shadow-soft: 0 8px 24px rgba(31, 74, 53, .09), 0 2px 6px rgba(31, 74, 53, .05);
+  --shadow-lift: 0 16px 34px rgba(31, 74, 53, .14), 0 4px 10px rgba(31, 74, 53, .07);
+  --ease: cubic-bezier(.22, .9, .3, 1);
+  --duration-fast: 180ms;
+  --duration-medium: 360ms;
+  --duration-slow: 650ms;
+  --duration-drift: 36s;
+  --font-display: "Fraunces", Georgia, serif;
+  --font-body: "DM Sans", "Trebuchet MS", sans-serif;
+}
