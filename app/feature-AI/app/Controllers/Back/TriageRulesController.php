@@ -3,11 +3,11 @@ declare(strict_types=1);
 
 final class TriageRulesController extends Controller
 {
+    protected string $page = 'triage-rules';
+    protected string $title = 'Triage Rules';
+
     public function index(): void
     {
-        $page = 'back/triage_rules'; $title = 'Triage Rules'; $currentPage = 'triage-rules';
-        $rules = TriageRule::all();
-        $this->viewData = compact('page', 'title', 'currentPage', 'rules');
-        $this->render($page);
+        $this->render('back/triage_rules', ['rules' => TriageRule::all()]);
     }
 }

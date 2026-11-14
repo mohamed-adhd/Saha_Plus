@@ -1,0 +1,40 @@
+/* Back-office adaptations use the shared kit tokens. */
+body:has(.admin-sidebar) { color: var(--ink); font-family: var(--font-body); }
+.main-wrapper { position: relative; z-index: 1; margin-left: 250px; min-height: 100vh; }
+.main-content { min-height: 100vh; }
+.admin-sidebar { position: fixed; z-index: 1020; inset: 0 auto 0 0; width: 250px; padding: 1.3rem 1rem; color: var(--cream); background: var(--forest-900); border-right: 1px solid #315a3e; }
+.admin-brand { display: block; margin: 0 0 2rem .5rem; color: var(--cream); font-size: 1.5rem; font-weight: 800; text-decoration: none; }
+.admin-brand span { color: #c7d9bc; }
+.sidebar-label { margin: 1rem .65rem .5rem; color: #c6d6bc; font-size: .7rem; font-weight: 700; letter-spacing: .08em; }
+.sidebar-link { display: block; margin: .15rem 0; padding: .65rem .75rem; border-radius: .4rem; color: #e8eee1; text-decoration: none; }
+.sidebar-link:hover, .sidebar-link.active { color: var(--forest-900); background: var(--sage-100); }
+.admin-topbar { display: flex; justify-content: space-between; align-items: center; min-height: 68px; padding: 0 1.5rem; background: #faf8f0; border-bottom: 1px solid #d5dfca; }
+.admin-topbar a { color: var(--forest-800) !important; }
+.admin-footer { padding: 1.25rem 1.5rem; color: #526b5b; }
+.content-area .card, .content-area .modal-content { border-color: #d5dfca; border-radius: 18px; background: #fbf9f2; box-shadow: 0 7px 22px rgba(31, 74, 53, .07); }
+.content-area .table { --bs-table-bg: transparent; --bs-table-color: var(--ink); --bs-table-border-color: #e2e4d7; }
+.content-area .text-muted { color: #526b5b !important; }
+.content-area .form-control, .content-area .form-select { border-color: #b9cbae; border-radius: 11px; color: var(--ink); background-color: #fffdf7; }
+.content-area .btn-primary, .content-area .btn-success { --bs-btn-color: #fff; --bs-btn-bg: var(--forest-800); --bs-btn-border-color: var(--forest-800); --bs-btn-hover-bg: var(--moss-600); --bs-btn-hover-border-color: var(--moss-600); }
+.content-area .btn-outline-primary { --bs-btn-color: var(--forest-800); --bs-btn-border-color: var(--moss-600); --bs-btn-hover-color: #fff; --bs-btn-hover-bg: var(--forest-800); --bs-btn-hover-border-color: var(--forest-800); }
+.content-area .btn-outline-secondary { --bs-btn-color: var(--forest-800); --bs-btn-border-color: #879b83; }
+.content-area .triage-badge--informational { color: #fff; background: var(--status-info); }
+.content-area .triage-badge--consult { color: #302300; background: #f4cf6d; }
+.content-area .triage-badge--urgent { color: #fff; background: #a9322b; }
+.content-area .triage-badge { font-family: var(--font-body); }
+.content-area .triage-panel--informational { border-top: 4px solid var(--status-info); }
+.content-area .triage-panel--consult { border-top: 4px solid var(--status-warn); }
+.content-area .triage-panel--urgent { border-top: 4px solid var(--status-danger); }
+.content-area .modal-header, .content-area .modal-footer { border-color: #e2e4d7; }
+.content-area .keyword-chip { color: var(--forest-900); background: var(--sage-100); }
+.content-area :focus-visible { outline: 3px solid var(--forest-800); outline-offset: 2px; }
+@media (max-width: 767.98px) {
+  .admin-sidebar { position: static; width: auto; border-right: 0; border-bottom: 1px solid #315a3e; }
+  .admin-sidebar nav { display: flex; flex-wrap: wrap; gap: .25rem; }
+  .sidebar-label { flex-basis: 100%; }
+  .sidebar-label.mt-4 { margin-top: .5rem !important; }
+  .sidebar-link { padding: .5rem; }
+  .main-wrapper { margin-left: 0; }
+  .admin-topbar { padding: 0 .9rem; }
+  .content-area { padding: 1rem .75rem; }
+}

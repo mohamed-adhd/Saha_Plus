@@ -3,10 +3,11 @@ declare(strict_types=1);
 
 final class AssistantSettingsController extends Controller
 {
+    protected string $page = 'assistant-settings';
+    protected string $title = 'Assistant Settings';
+
     public function index(): void
     {
-        $page = 'back/assistant_settings'; $title = 'Assistant Settings'; $currentPage = 'assistant-settings';
-        $this->viewData = compact('page', 'title', 'currentPage');
-        $this->render($page);
+        $this->render('back/assistant_settings');
     }
 }

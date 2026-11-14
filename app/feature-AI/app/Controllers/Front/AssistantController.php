@@ -3,13 +3,15 @@ declare(strict_types=1);
 
 final class AssistantController extends Controller
 {
+    protected string $layout = 'layout_front';
+    protected string $page = 'health-guide';   // matches the 'AI Assistant' key in ui-kit/config/menu.php
+    protected string $title = 'AI Health Assistant';
+    protected array $stylesheets = ['app/Views/assets/css/assistant.css', 'app/Views/assets/css/shell.css'];
+    protected array $scripts = ['app/Views/assets/js/shell.js', 'app/Views/assets/js/assistant.js'];
+
     public function index(): void
     {
-        $page = 'assistant';
-        $title = 'AI Health Assistant';
-        $currentPage = 'health-guide';
-        $sources = Source::all();
-        require __DIR__ . '/../../../includes/front-layout.php';
+        $this->render('front/assistant', ['sources' => Source::all()]);
     }
 
     public function comingSoon(): void
@@ -20,10 +22,9 @@ final class AssistantController extends Controller
         ];
         $module = filter_input(INPUT_GET, 'module', FILTER_UNSAFE_RAW) ?: 'home';
         if (!isset($modules[$module])) { $module = 'home'; }
-        $title = $modules[$module];
-        $page = 'coming-soon';
-        $currentPage = $module;
-        $frontView = 'coming_soon';
-        require __DIR__ . '/../../../includes/front-layout.php';
+
+        $this->page = $module;            // key used for the active sidebar link
+        $this->title = $modules[$module];
+        $this->render('front/coming_soon');
     }
 }

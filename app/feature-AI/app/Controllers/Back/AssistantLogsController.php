@@ -3,11 +3,11 @@ declare(strict_types=1);
 
 final class AssistantLogsController extends Controller
 {
+    protected string $page = 'assistant-logs';
+    protected string $title = 'Assistant Logs';
+
     public function index(): void
     {
-        $page = 'back/assistant_logs'; $title = 'Assistant Logs'; $currentPage = 'assistant-logs';
-        $conversations = Conversation::all();
-        $this->viewData = compact('page', 'title', 'currentPage', 'conversations');
-        $this->render($page);
+        $this->render('back/assistant_logs', ['conversations' => Conversation::all()]);
     }
 }

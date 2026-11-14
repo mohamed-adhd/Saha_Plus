@@ -24,7 +24,7 @@ $lastSection = '';
     <?php foreach ($menuItems as $item): ?>
       <?php if ($item['section'] !== $lastSection): $lastSection = $item['section']; ?><p class="sp-sidebar__section"><?= htmlspecialchars($lastSection, ENT_QUOTES, 'UTF-8') ?></p><?php endif; ?>
       <?php $active = navActive($item['key']) !== ''; ?>
-      <a class="sp-nav-item<?= $active ? ' is-active' : '' ?>" href="<?= htmlspecialchars(base_url($item['url']), ENT_QUOTES, 'UTF-8') ?>" title="<?= htmlspecialchars($item['label'], ENT_QUOTES, 'UTF-8') ?>" aria-label="<?= htmlspecialchars($item['label'], ENT_QUOTES, 'UTF-8') ?>" data-nav-key="<?= htmlspecialchars($item['key'], ENT_QUOTES, 'UTF-8') ?>" <?= $active ? 'aria-current="page"' : '' ?>>
+      <a class="sp-nav-item<?= $active ? ' active is-active' : '' ?>" href="<?= htmlspecialchars(base_url($item['url']), ENT_QUOTES, 'UTF-8') ?>" title="<?= htmlspecialchars($item['label'], ENT_QUOTES, 'UTF-8') ?>" aria-label="<?= htmlspecialchars($item['label'], ENT_QUOTES, 'UTF-8') ?>" data-nav-key="<?= htmlspecialchars($item['key'], ENT_QUOTES, 'UTF-8') ?>" <?= $active ? 'aria-current="page"' : '' ?>>
         <span class="sp-nav-item__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><?= $iconPaths[$item['icon']] ?? $iconPaths['home'] ?></svg></span>
         <span class="sp-nav-item__label"><?= htmlspecialchars($item['label'], ENT_QUOTES, 'UTF-8') ?></span>
       </a>

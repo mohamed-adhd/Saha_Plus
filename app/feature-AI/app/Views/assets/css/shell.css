@@ -1,0 +1,19 @@
+/* Spinner (front office), preloader (back office), footer and back-to-top. */
+#spinner, #preloader {
+  position: fixed; inset: 0; z-index: 2000;
+  display: flex; align-items: center; justify-content: center;
+  background: #fff; transition: opacity .4s ease, visibility .4s ease;
+}
+#spinner.is-hidden, #preloader.is-hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+
+.sp-footer { padding: 1.25rem 1rem 1.5rem; text-align: center; color: #5b6b5d; }
+
+.back-to-top {
+  position: fixed; right: 1.25rem; bottom: 1.25rem; z-index: 1030;
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 2.75rem; height: 2.75rem; border-radius: 50%;
+  background: #2f6b4f; color: #fff; text-decoration: none; font-size: 1.25rem;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, .18);
+}
+.back-to-top:hover { color: #fff; filter: brightness(1.1); }
+.back-to-top[hidden] { display: none; }
