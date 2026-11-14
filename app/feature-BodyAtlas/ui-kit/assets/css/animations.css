@@ -1,0 +1,12 @@
+[data-sp-reveal], .sp-enter { opacity: 0; transform: translateY(12px); }
+[data-sp-reveal].is-revealed, .sp-enter.is-revealed { animation: sp-fade-up var(--duration-slow) var(--ease) both; animation-delay: var(--sp-delay, 0ms); }
+@keyframes sp-fade-up { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes sp-garden-drift { from { transform: translate3d(-1%, -1%, 0) scale(1); } to { transform: translate3d(1%, 1%, 0) scale(1.04); } }
+@keyframes sp-skeleton-shimmer { to { transform: translateX(100%); } }
+@keyframes sp-leaf-sway { 0%, 100% { transform: rotate(-2deg); } 50% { transform: rotate(3deg); } }
+@keyframes sp-pop { from { opacity: 0; transform: scale(.9); } to { opacity: 1; transform: scale(1); } }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; transition-duration: .01ms !important; }
+  [data-sp-reveal], .sp-enter { opacity: 1; transform: none; }
+}
