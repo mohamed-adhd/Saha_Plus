@@ -1,0 +1,56 @@
+/* Medical Map – Front Office styles (colours come from shared/assets/css/tokens.css) */
+.medmap {
+  --type-hospital: #c8453b;
+  --type-clinic: #2f7fb8;
+  --type-donation_center: #c9794a;
+}
+.medmap-eyebrow { margin: 0 0 .35rem; color: var(--moss-600); font-size: .8rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+
+/* ---------- Filters ---------- */
+.medmap-types { margin: 0; padding-top: 0; padding-bottom: 0; border: 0; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+.medmap-types legend { float: none; width: 100%; margin: 0 0 .1rem; font-size: .875rem; font-weight: 600; color: var(--ink); }
+.medmap-type { display: inline-flex; align-items: center; gap: .4rem; padding: .45rem .8rem; border: 1px solid var(--sage-300); border-radius: var(--radius-pill); background: #fffdf7; font-size: .875rem; font-weight: 600; cursor: pointer; user-select: none; }
+.medmap-type input { position: absolute; opacity: 0; pointer-events: none; }
+.medmap-type:has(input:checked) { border-color: var(--forest-800); background: var(--sage-100); }
+.medmap-type:has(input:focus-visible) { outline: 3px solid var(--focus-ring); outline-offset: 2px; }
+.medmap-dot { width: .7rem; height: .7rem; border-radius: 50%; background: var(--muted); }
+.medmap-type--hospital .medmap-dot { background: var(--type-hospital); }
+.medmap-type--clinic .medmap-dot { background: var(--type-clinic); }
+.medmap-type--donation_center .medmap-dot { background: var(--type-donation_center); }
+.medmap-count { color: var(--muted); font-weight: 600; }
+
+/* ---------- Map ---------- */
+.medmap-map-card { overflow: hidden; padding: 0; }
+.medmap-map { height: 620px; background: #0e1a14; font-family: var(--font-body); z-index: 0; }
+@media (max-width: 991.98px) { .medmap-map { height: 440px; } }
+
+/* Markers: a coloured pin with a letter (H, C, D) – one colour per facility type */
+.medmap-pin { display: grid; place-items: center; width: 30px; height: 30px; border: 2px solid #fff; border-radius: 50% 50% 50% 0; transform: rotate(-45deg); box-shadow: 0 2px 6px rgba(0, 0, 0, .45); background: var(--muted); }
+.medmap-pin span { transform: rotate(45deg); color: #fff; font-size: .8rem; font-weight: 700; line-height: 1; }
+.medmap-pin--hospital { background: #c8453b; }
+.medmap-pin--clinic { background: #2f7fb8; }
+.medmap-pin--donation_center { background: #c9794a; }
+.medmap-pin.is-selected { outline: 3px solid #ffe27a; outline-offset: 2px; }
+.leaflet-popup-content { margin: .7rem .9rem; font-family: var(--font-body); }
+.medmap-popup strong { display: block; color: var(--forest-900); }
+.medmap-popup small { color: var(--muted); }
+
+/* ---------- Side panel ---------- */
+.medmap-panel__body { max-height: 566px; overflow-y: auto; }
+.medmap-list { margin: 0; padding: 0; list-style: none; display: grid; gap: .5rem; }
+.medmap-item { display: block; width: 100%; padding: .7rem .85rem; border: 1px solid var(--sand); border-radius: var(--radius-sm); background: #fffdf7; text-align: left; color: var(--ink); transition: border-color var(--duration-fast), background var(--duration-fast); }
+.medmap-item:hover, .medmap-item:focus-visible { border-color: var(--moss-600); background: var(--sage-100); }
+.medmap-item__name { display: flex; align-items: center; gap: .45rem; font-weight: 700; }
+.medmap-item__meta { display: block; margin-top: .15rem; color: var(--muted); font-size: .85rem; }
+.medmap-back { padding: .3rem .7rem; font-size: .8rem; }
+.medmap-details h2 { margin: 0 0 .25rem; font-size: 1.25rem; }
+.medmap-details dl { display: grid; grid-template-columns: auto 1fr; gap: .35rem .9rem; margin: 1rem 0; }
+.medmap-details dt { color: var(--muted); font-weight: 600; }
+.medmap-details dd { margin: 0; }
+.medmap-details h3 { margin: 1.25rem 0 .6rem; font-size: 1rem; }
+.medmap-doctor { padding: .6rem .75rem; border: 1px solid var(--sand); border-radius: var(--radius-sm); background: #fffdf7; }
+.medmap-doctor + .medmap-doctor { margin-top: .5rem; }
+.medmap-doctor.is-match { border-color: var(--moss-600); background: var(--sage-100); }
+.medmap-doctor strong { display: block; }
+.medmap-doctor small { display: block; color: var(--muted); overflow-wrap: anywhere; }
+.medmap-tags { display: flex; flex-wrap: wrap; gap: .4rem; margin-top: .4rem; }
