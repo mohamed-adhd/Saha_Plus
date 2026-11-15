@@ -13,6 +13,11 @@ final class Database
     {
         if (self::$pdo === null) {
             $config = require __DIR__ . '/../../config/database.php';
+            // Optional per-computer override (e.g. a MySQL password). Ignored by Git.
+            $localFile = __DIR__ . '/../../config/database.local.php';
+            if (is_file($localFile)) {
+                $config = array_merge($config, require $localFile);
+            }
             $dsn = sprintf(
                 'mysql:host=%s;port=%d;dbname=%s;charset=%s',
                 $config['host'], $config['port'], $config['dbname'], $config['charset']
