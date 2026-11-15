@@ -38,7 +38,7 @@ Requirements: XAMPP (PHP 8.1 or newer, MySQL/MariaDB) and an internet connection
 2. Start **Apache** and **MySQL** in the XAMPP control panel.
 3. Open phpMyAdmin (`http://localhost/phpmyadmin`), tab **Import**, choose `app/feature-MedicalMap/database/medical_map.sql`, click **Import**.
    The script creates the database `saha_plus` and the tables `facility` and `doctor`. Importing it again resets these two tables only.
-4. If your MySQL user is not `root` with an empty password, edit `config/database.php`.
+4. If your MySQL user is not `root` with an empty password, see **"Access denied" error** below.
 5. Open the module:
 
 | Page | URL |
@@ -54,6 +54,28 @@ php -S localhost:8000 -t app
 ```
 
 then open `http://localhost:8000/feature-MedicalMap/index.php`.
+
+### "Access denied" error
+
+The message `Access denied for user 'root'@'localhost' (using password: NO)` means your MySQL does not accept `root` without a password. This is the usual case on Linux and macOS. Give the module its own MySQL user:
+
+1. Open MySQL as administrator (`sudo mysql`, or `sudo /opt/lampp/bin/mysql -u root` with XAMPP on Linux) and run:
+
+   ```sql
+   CREATE USER 'saha'@'localhost' IDENTIFIED BY 'choose-a-password';
+   GRANT ALL PRIVILEGES ON saha_plus.* TO 'saha'@'localhost';
+   FLUSH PRIVILEGES;
+   ```
+
+2. Import the data with the same administrator access (the path is from the repository root):
+
+   ```bash
+   sudo mysql < app/feature-MedicalMap/database/medical_map.sql
+   ```
+
+3. Copy `config/database.local.example.php` to `config/database.local.php` and write the same user and password in it.
+
+`database.local.php` is ignored by Git, so each developer keeps their own settings and no password is pushed.
 
 ## Structure (PHP MVC)
 

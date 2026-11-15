@@ -58,6 +58,7 @@ try {
         . '<h1>Medical Map – database not available</h1>'
         . '<ol><li>Start <strong>MySQL</strong> in the XAMPP control panel.</li>'
         . '<li>Import <code>app/feature-MedicalMap/database/medical_map.sql</code> in phpMyAdmin.</li>'
-        . '<li>Check the settings in <code>app/feature-MedicalMap/config/database.php</code>.</li></ol>'
+        . '<li>If the detail below says <em>Access denied</em>: your MySQL user or password is different. Copy '
+        . '<code>config/database.local.example.php</code> to <code>config/database.local.php</code> and put your own user and password in it.</li></ol>'
         . '<p><small>Technical detail: ' . $detail . '</small></p></body></html>';
 }
