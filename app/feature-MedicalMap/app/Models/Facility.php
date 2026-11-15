@@ -112,6 +112,145 @@ final class Facility
         return $cities;
     }
 
+    /* =====================================================================
+     * Back Office: list, validation, create / update / delete
+     * ===================================================================== */
+
+    /**
+     * Facilities for the admin table, optionally filtered by a search text and a type.
+     * @return list<Facility>
+     */
+    public static function adminSearch(string $text = '', string $type = ''): array
+    {
+        $where = [];
+        $params = [];
+        if ($text !== '') {
+            // Same value under three names: real prepared statements do not allow reusing a name.
+            $like = '%' . addcslashes($text, '%_\\') . '%';
+            $where[] = '(name LIKE :t1 OR city LIKE :t2 OR governorate LIKE :t3)';
+            $params += ['t1' => $like, 't2' => $like, 't3' => $like];
+        }
+        if (isset(self::TYPES[$type])) {
+            $where[] = 'type = :type';
+            $params['type'] = $type;
+        }
+        $sql = 'SELECT * FROM facility' . ($where ? ' WHERE ' . implode(' AND ', $where) : '') . ' ORDER BY governorate, name';
+        $statement = Database::connection()->prepare($sql);
+        $statement->execute($params);
+        return array_map([self::class, 'fromRow'], $statement->fetchAll());
+    }
+
+    /**
+     * Cleans and checks the fields of the facility form.
+     *
+     * @param array<string, mixed> $input usually $_POST
+     * @return array{0: array<string, mixed>, 1: array<string, string>} [clean data, errors by field]
+     */
+    public static function validate(array $input): array
+    {
+        $data = [
+            'name' => trim((string)($input['name'] ?? '')),
+            'type' => (string)($input['type'] ?? ''),
+            'address' => trim((string)($input['address'] ?? '')),
+            'city' => trim((string)($input['city'] ?? '')),
+            'governorate' => (string)($input['governorate'] ?? ''),
+            'latitude' => str_replace(',', '.', trim((string)($input['latitude'] ?? ''))),
+            'longitude' => str_replace(',', '.', trim((string)($input['longitude'] ?? ''))),
+            'phone' => trim((string)($input['phone'] ?? '')),
+            'emergencyStatus' => !empty($input['emergencyStatus']),
+            'isDemo' => !empty($input['isDemo']),
+        ];
+        $errors = [];
+
+        if (text_length($data['name']) < 2 || text_length($data['name']) > 120) {
+            $errors['name'] = 'Enter a name (2 to 120 characters).';
+        }
+        if (!isset(self::TYPES[$data['type']])) {
+            $errors['type'] = 'Choose a facility type.';
+        }
+        if ($data['address'] === '' || text_length($data['address']) > 200) {
+            $errors['address'] = 'Enter an address (200 characters maximum).';
+        }
+        if ($data['city'] === '' || text_length($data['city']) > 80) {
+            $errors['city'] = 'Enter a city (80 characters maximum).';
+        }
+        // Tunisia only: the governorate must be one of the 24.
+        if (!Governorate::exists($data['governorate'])) {
+            $errors['governorate'] = 'Choose one of the 24 Tunisian governorates.';
+        }
+        // Tunisia only: the coordinates must be numbers located inside the country limits.
+        if (!is_numeric($data['latitude']) || !is_numeric($data['longitude'])) {
+            $errors['location'] = 'Enter the latitude and the longitude as numbers, or click on the map.';
+        } elseif (!Governorate::isInsideTunisia((float)$data['latitude'], (float)$data['longitude'])) {
+            $errors['location'] = sprintf(
+                'This point is outside Tunisia. Latitude must be between %.2f and %.2f, longitude between %.2f and %.2f.',
+                Governorate::LAT_MIN, Governorate::LAT_MAX, Governorate::LNG_MIN, Governorate::LNG_MAX
+            );
+        }
+        if ($data['phone'] !== '' && !is_tunisian_phone($data['phone'])) {
+            $errors['phone'] = 'Enter a Tunisian number: 8 digits, optionally starting with +216.';
+        }
+
+        return [$data, $errors];
+    }
+
+    /** Inserts a facility (data must come from validate()). Returns the new id. */
+    public static function create(array $data): int
+    {
+        $statement = Database::connection()->prepare(
+            'INSERT INTO facility (name, type, address, city, governorate, latitude, longitude, phone, emergency_status, is_demo)
+             VALUES (:name, :type, :address, :city, :governorate, :latitude, :longitude, :phone, :emergency_status, :is_demo)'
+        );
+        $statement->execute(self::toRow($data));
+        return (int)Database::connection()->lastInsertId();
+    }
+
+    /** Updates a facility (data must come from validate()). */
+    public static function update(int $id, array $data): void
+    {
+        $statement = Database::connection()->prepare(
+            'UPDATE facility SET name = :name, type = :type, address = :address, city = :city, governorate = :governorate,
+                    latitude = :latitude, longitude = :longitude, phone = :phone,
+                    emergency_status = :emergency_status, is_demo = :is_demo
+             WHERE id = :id'
+        );
+        $statement->execute(self::toRow($data) + ['id' => $id]);
+    }
+
+    /** Deletes a facility. The controller checks first that it has no doctor (the database refuses otherwise). */
+    public static function delete(int $id): void
+    {
+        $statement = Database::connection()->prepare('DELETE FROM facility WHERE id = :id');
+        $statement->execute(['id' => $id]);
+    }
+
+    /** Values of this facility in the shape expected by the form (same keys as validate()). */
+    public function toFormData(): array
+    {
+        return [
+            'name' => $this->name, 'type' => $this->type, 'address' => $this->address, 'city' => $this->city,
+            'governorate' => $this->governorate, 'latitude' => (string)$this->latitude, 'longitude' => (string)$this->longitude,
+            'phone' => (string)$this->phone, 'emergencyStatus' => $this->emergencyStatus, 'isDemo' => $this->isDemo,
+        ];
+    }
+
+    /** Converts validated data into the database columns. */
+    private static function toRow(array $data): array
+    {
+        return [
+            'name' => $data['name'],
+            'type' => $data['type'],
+            'address' => $data['address'],
+            'city' => $data['city'],
+            'governorate' => $data['governorate'],
+            'latitude' => round((float)$data['latitude'], 6),
+            'longitude' => round((float)$data['longitude'], 6),
+            'phone' => $data['phone'] !== '' ? $data['phone'] : null,
+            'emergency_status' => $data['emergencyStatus'] ? 1 : 0,
+            'is_demo' => $data['isDemo'] ? 1 : 0,
+        ];
+    }
+
     /** @return list<Doctor> the doctors who work in this facility (may be empty) */
     public function doctors(): array
     {

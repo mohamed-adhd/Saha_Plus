@@ -1,0 +1,5 @@
+/* Medical Map – Back Office additions (the admin theme itself is shared/assets/css/admin.css) */
+.medmap-picker { height: 340px; border: 1px solid #b9cbae; border-radius: 11px; z-index: 0; }
+.medmap-picker.is-invalid { border-color: #c8453b; }
+.medmap-form-narrow { max-width: 760px; }
+.content-area .card-footer { border-color: #e2e4d7; padding: 1rem 1.25rem; }

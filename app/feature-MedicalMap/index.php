@@ -27,7 +27,10 @@ function asset(string $path): string
     return str_starts_with($path, 'shared/') ? base_url('../' . $path) : base_url($path);
 }
 
+session_start();   // used by the Back Office for confirmation messages and form protection
+
 require_once __DIR__ . '/../shared/helpers.php';   // navActive(), e()
+require_once __DIR__ . '/app/helpers.php';         // is_tunisian_phone(), text_length()
 require_once __DIR__ . '/app/Controllers/Controller.php';
 foreach (['Database', 'Governorate', 'Facility', 'Doctor'] as $model) {
     require_once __DIR__ . '/app/Models/' . $model . '.php';
