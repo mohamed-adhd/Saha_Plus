@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Don de sang – Présentation du projet</title>
+<style>
+:root{--g1:#f1f9f3;--g2:#dff1e5;--g3:#bfe3cb;--g4:#8fcba6;--g5:#5fa97f;--ink:#1f3a2e;--mut:#5d7568;--red:#c9475a}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:'Segoe UI',system-ui,Arial,sans-serif;color:var(--ink);background:var(--g1);line-height:1.6}
+nav{position:sticky;top:0;z-index:10;background:#f1f9f3d9;backdrop-filter:blur(8px);display:flex;justify-content:space-between;align-items:center;padding:12px 6vw;border-bottom:1px solid var(--g3)}
+nav b{font-size:1.1rem}
+nav div a{color:var(--ink);text-decoration:none;margin-left:20px;font-size:.92rem}
+nav div a:hover{color:var(--g5)}
+section{padding:80px 6vw;max-width:1150px;margin:auto}
+h2{font-size:2rem;margin:0 0 8px}
+h2::after{content:"";display:block;width:56px;height:5px;background:var(--g4);border-radius:4px;margin-top:10px}
+.sub{color:var(--mut);max-width:640px;margin:14px 0 36px}
+.hero{min-height:88vh;display:flex;flex-direction:column;justify-content:center;position:relative}
+.hero::before,.hero::after{content:"";position:absolute;border-radius:50%;z-index:-1}
+.hero::before{width:380px;height:380px;background:var(--g2);right:-80px;top:40px}
+.hero::after{width:180px;height:180px;background:var(--g3);right:260px;bottom:60px;opacity:.7}
+.pill{display:inline-block;background:var(--g3);color:#2d5a43;padding:6px 16px;border-radius:30px;font-size:.85rem;font-weight:600;width:max-content}
+.hero h1{font-size:clamp(2.4rem,6vw,4.2rem);line-height:1.1;margin:18px 0}
+.hero h1 span{color:var(--g5)}
+.drop{color:var(--red)}
+.btns{display:flex;gap:12px;flex-wrap:wrap;margin-top:12px}
+.btn{padding:13px 26px;border-radius:30px;text-decoration:none;font-weight:600;transition:.25s}
+.b1{background:var(--g5);color:#fff;box-shadow:0 6px 18px #5fa97f55}
+.b2{background:#fff;color:var(--ink);border:2px solid var(--g3)}
+.btn:hover{transform:translateY(-3px)}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:16px;margin-top:50px;max-width:700px}
+.stat{background:#fff;border-radius:16px;padding:16px;text-align:center;border:1px solid var(--g3)}
+.stat b{display:block;font-size:2rem;color:var(--g5)}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:22px}
+.card{background:#fff;border-radius:20px;padding:26px;border:1px solid var(--g3);border-top:6px solid var(--g4);transition:.3s}
+.card:hover{transform:translateY(-6px);box-shadow:0 14px 30px #5fa97f33}
+.ico{width:54px;height:54px;border-radius:16px;background:var(--g2);display:grid;place-items:center;font-size:1.6rem;margin-bottom:12px}
+.card h3{margin:0 0 8px}
+.card ul{padding-left:18px;margin:8px 0 0;color:var(--mut)}
+.alt{background:var(--g2);max-width:none}
+.alt>div{max-width:1150px;margin:auto}
+.erd{display:flex;align-items:center;justify-content:center;gap:0;flex-wrap:wrap}
+.ent{background:#fff;border-radius:16px;border:2px solid var(--g4);min-width:230px;overflow:hidden;box-shadow:0 8px 20px #5fa97f22}
+.ent h4{margin:0;background:var(--g4);color:#14382a;padding:10px 16px}
+.ent p{margin:0;padding:6px 16px;font-size:.88rem;border-bottom:1px dashed var(--g3);color:var(--mut)}
+.ent p:last-child{border:0}
+.ent code{color:var(--ink);font-weight:600}
+.rel{padding:0 14px;color:var(--g5);font-weight:700;text-align:center;font-size:.85rem}
+.rel i{display:block;height:3px;background:var(--g4);min-width:60px;margin:4px 0;border-radius:3px}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:20px;counter-reset:s}
+.step{background:#fff;border-radius:18px;padding:22px;position:relative;border:1px solid var(--g3)}
+.step::before{counter-increment:s;content:counter(s);position:absolute;top:-16px;left:20px;width:34px;height:34px;border-radius:50%;background:var(--g5);color:#fff;display:grid;place-items:center;font-weight:700}
+.tags{display:flex;flex-wrap:wrap;gap:10px}
+.tags span{background:#fff;border:1px solid var(--g4);padding:8px 18px;border-radius:30px;font-weight:600;color:#2d5a43}
+.badge{display:inline-block;padding:3px 12px;border-radius:12px;font-size:.78rem;color:#fff;margin:2px}
+.n{background:#7fc29a}.l{background:#e8a05a}.c{background:var(--red)}
+footer{text-align:center;padding:40px;color:var(--mut);border-top:1px solid var(--g3)}
+.rv{opacity:0;transform:translateY(30px);transition:.8s}
+.rv.on{opacity:1;transform:none}
+@media(max-width:700px){nav div{display:none}.hero::before{width:220px;height:220px}.rel{padding:10px 0}}
+</style>
+</head>
+<body>
+<nav><b>🩸 <span style="color:var(--g5)">Don</span> de sang</b>
+<div><a href="#acteurs">Acteurs</a><a href="#modele">Modèle</a><a href="#parcours">Parcours</a><a href="#atouts">Atouts</a></div></nav>
+
+<section class="hero">
+  <span class="pill">Projet web · Gestion des dons</span>
+  <h1>Chaque don compte,<br><span>chaque goutte</span> <span class="drop">●</span> aussi.</h1>
+  <p class="sub" style="margin:0 0 20px">Une plateforme qui relie donneurs, centres de transfusion et administrateurs : suivre les stocks, repérer les besoins urgents et réserver un don en quelques clics.</p>
+  <div class="btns"><a class="btn b1" href="index.html">Ouvrir l’application</a><a class="btn b2" href="#acteurs">Découvrir le projet</a></div>
+  <div class="stats">
+    <div class="stat"><b>3</b>profils d’utilisateurs</div>
+    <div class="stat"><b>8</b>groupes sanguins</div>
+    <div class="stat"><b>4</b>statuts de rendez-vous</div>
+  </div>
+</section>
+
+<section id="acteurs">
+  <h2 class="rv">Qui utilise la plateforme ?</h2>
+  <p class="sub rv">Trois profils, trois parcours pensés pour être simples et clairs.</p>
+  <div class="cards">
+    <div class="card rv"><div class="ico">👀</div><h3>Visiteur</h3><ul><li>Consulter la matrice de compatibilité</li><li>Voir les besoins urgents en sang</li></ul></div>
+    <div class="card rv"><div class="ico">💚</div><h3>Patient / Donneur</h3><ul><li>Vérifier son éligibilité</li><li>Réserver un rendez-vous (option anonyme)</li><li>Annuler son rendez-vous</li></ul></div>
+    <div class="card rv"><div class="ico">🛠️</div><h3>Administrateur</h3><ul><li>Gérer les stocks de sang</li><li>Gérer les rendez-vous</li></ul></div>
+  </div>
+</section>
+
+<section class="alt" id="modele"><div>
+  <h2 class="rv">Le modèle de données</h2>
+  <p class="sub rv">Un centre (Facility) détient plusieurs stocks et reçoit des rendez-vous de don.</p>
+  <div class="erd rv">
+    <div class="ent"><h4>BloodStock</h4><p><code>id</code></p><p>bloodType <small>(O- … AB+)</small></p><p>quantity</p><p>urgencyLevel <span class="badge n">normal</span><span class="badge l">low</span><span class="badge c">critical</span></p><p>facility_id</p><p>updatedAt</p></div>
+    <div class="rel">0..*<i></i>1</div>
+    <div class="ent"><h4>Facility</h4><p><code>id</code></p><p>name</p><p style="text-align:center">🏥</p></div>
+    <div class="rel">1<i></i>0..*</div>
+    <div class="ent"><h4>DonationAppointment</h4><p><code>id</code></p><p>user_id</p><p>facility_id</p><p>bloodType</p><p>date</p><p>status <small>(pending · confirmed · done · cancelled)</small></p></div>
+  </div>
+</div></section>
+
+<section id="parcours">
+  <h2 class="rv">Le parcours d’un don</h2>
+  <p class="sub rv">De la vérification à la confirmation, en quatre étapes.</p>
+  <div class="steps">
+    <div class="step rv"><h3>Éligibilité</h3>Âge, poids, délai depuis le dernier don et état de santé sont contrôlés.</div>
+    <div class="step rv"><h3>Réservation</h3>Choix du centre, du groupe sanguin et de la date, avec nom et coordonnées… ou en anonyme.</div>
+    <div class="step rv"><h3>Validation</h3>L’administrateur passe le rendez-vous de <i>pending</i> à <i>confirmed</i>.</div>
+    <div class="step rv"><h3>Don réalisé</h3>Le rendez-vous passe à <i>done</i> et le stock est mis à jour.</div>
+  </div>
+</section>
+
+<section class="alt" id="atouts"><div>
+  <h2 class="rv">Nos atouts</h2>
+  <p class="sub rv">Ce qui rend la plateforme utile au quotidien.</p>
+  <div class="cards">
+    <div class="card rv"><div class="ico">🕶️</div><h3>Don anonyme</h3>Une case à cocher suffit : nom et coordonnées ne sont pas enregistrés.</div>
+    <div class="card rv"><div class="ico">🚨</div><h3>Alertes d’urgence</h3>Le niveau d’urgence est calculé automatiquement selon la quantité en stock.</div>
+    <div class="card rv"><div class="ico">🧬</div><h3>Compatibilité claire</h3>Une matrice visuelle donneur → receveur pour comprendre en un coup d’œil.</div>
+  </div>
+  <h3 class="rv" style="margin:40px 0 14px">Technologies</h3>
+  <div class="tags rv"><span>HTML5</span><span>CSS3</span><span>JavaScript</span><span>localStorage</span><span>VS Code</span></div>
+</div></section>
+
+<footer>🩸 Don de sang · Projet web · Un geste simple, une vie sauvée.</footer>
+
+<script>
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target)}}),{threshold:.15});
+document.querySelectorAll('.rv').forEach((el,i)=>{el.style.transitionDelay=(i%3)*.12+'s';io.observe(el)});
+</script>
+</body>
+</html>

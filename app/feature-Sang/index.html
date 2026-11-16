@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Don de sang</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header>
+  <h1>🩸 Don de sang</h1>
+  <nav id="tabs">
+    <button data-v="visitor" class="on">Visiteur</button>
+    <button data-v="patient">Patient</button>
+    <button data-v="admin">Admin</button>
+  </nav>
+</header>
+<main>
+
+<section id="visitor">
+  <h2>Carte des centres de don</h2>
+  <div class="bar">
+    <label class="chk"><input type="checkbox" id="onlyAcc"> ♿ Accès PMR uniquement</label>
+    <button id="near" type="button">📍 Le plus proche de moi</button>
+    <span class="leg"><i style="background:#5fa97f"></i>Stock normal <i style="background:#e8a05a"></i>Besoin <i style="background:#c9475a"></i>Critique</span>
+  </div>
+  <div id="map"></div>
+  <div id="nearest"></div>
+  <h2>Matrice de compatibilité</h2>
+  <div class="scroll"><table id="matrix"></table></div>
+  <h2>Besoins urgents</h2>
+  <div id="urgent"></div>
+</section>
+
+<section id="patient" hidden>
+  <div class="grid">
+    <form id="elig" class="card">
+      <h2>Vérifier mon éligibilité</h2>
+      <label>Âge <input type="number" name="age" required min="1"></label>
+      <label>Poids (kg) <input type="number" name="weight" required min="1"></label>
+      <label>Date du dernier don (optionnel) <input type="date" name="last"></label>
+      <label class="chk"><input type="checkbox" name="healthy"> Je suis en bonne santé aujourd’hui</label>
+      <button>Vérifier</button>
+      <div id="eligRes"></div>
+    </form>
+
+    <form id="book" class="card">
+      <h2>Réserver un rendez-vous</h2>
+      <label class="chk"><input type="checkbox" id="anon"> Rester anonyme</label>
+      <label>Nom complet <input id="name" required></label>
+      <label>Coordonnées (téléphone ou e-mail) <input id="contact" required></label>
+      <label>Centre <select id="facility"></select></label>
+      <label>Groupe sanguin <select id="bloodType"></select></label>
+      <label>Date <input type="date" id="date" required></label>
+      <button>Réserver</button>
+    </form>
+  </div>
+  <h2>Mes rendez-vous</h2>
+  <div class="scroll"><table id="mine"></table></div>
+</section>
+
+<section id="admin" hidden>
+  <h2>Gestion des stocks</h2>
+  <form id="stockForm" class="row">
+    <select id="sFac"></select>
+    <select id="sType"></select>
+    <input type="number" id="sQty" min="0" placeholder="Quantité" required>
+    <button>Ajouter / mettre à jour</button>
+  </form>
+  <div class="scroll"><table id="stocks"></table></div>
+  <h2>Gestion des rendez-vous</h2>
+  <div class="scroll"><table id="appts"></table></div>
+</section>
+
+</main>
+<script src="js/app.js"></script>
+</body>
+</html>

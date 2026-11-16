@@ -1,0 +1,37 @@
+*{box-sizing:border-box}
+body{margin:0;font-family:system-ui,Arial,sans-serif;background:#f6f3f3;color:#222}
+header{background:#b3202f;color:#fff;padding:14px 20px;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:10px}
+h1{margin:0;font-size:1.4rem}
+nav button{background:#fff3;color:#fff;border:0;padding:8px 16px;margin-left:6px;border-radius:6px;cursor:pointer}
+nav button.on{background:#fff;color:#b3202f;font-weight:bold}
+main{max-width:1000px;margin:auto;padding:16px}
+h2{color:#8a1621;margin-top:28px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px}
+.card{background:#fff;padding:16px;border-radius:10px;box-shadow:0 1px 4px #0002}
+label{display:block;margin:10px 0;font-size:.9rem}
+label.chk{display:flex;gap:8px;align-items:center}
+input,select{width:100%;padding:8px;margin-top:4px;border:1px solid #ccc;border-radius:6px}
+input[type=checkbox]{width:auto;margin:0}
+input:disabled{background:#eee}
+button{background:#b3202f;color:#fff;border:0;padding:9px 16px;border-radius:6px;cursor:pointer}
+.row{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+.row>*{flex:1;min-width:130px;margin:0}
+.scroll{overflow-x:auto}
+table{width:100%;border-collapse:collapse;background:#fff;border-radius:8px;overflow:hidden}
+th,td{padding:8px;border-bottom:1px solid #eee;text-align:center;font-size:.9rem}
+th{background:#f0dcdc}
+td input,td select{margin:0;padding:4px}
+.ok{background:#e3f6e6;padding:10px;border-radius:6px;margin-top:10px}
+.bad{background:#fde4e4;padding:10px;border-radius:6px;margin-top:10px}
+.tag{padding:3px 10px;border-radius:12px;color:#fff;font-size:.8rem}
+.critical{background:#c0392b}.low{background:#e67e22}.normal{background:#27ae60}
+.urg{background:#fff;padding:10px 14px;margin:6px 0;border-left:5px solid #c0392b;border-radius:6px;display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.urg.low{border-color:#e67e22;background:#fff}
+
+.bar{display:flex;flex-wrap:wrap;gap:14px;align-items:center;margin:12px 0}
+.bar label{margin:0}.bar input{width:auto}
+.leg i{display:inline-block;width:12px;height:12px;border-radius:50%;margin:0 4px 0 12px}
+#map{height:440px;border-radius:12px;border:2px solid #e0b4b4;z-index:1}
+.pin{display:block;width:22px;height:22px;border-radius:50% 50% 50% 0;transform:rotate(-45deg);border:2px solid #fff;box-shadow:0 2px 6px #0004}
+.near-card{background:#fff;padding:10px 14px;margin-top:8px;border-radius:8px;display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;box-shadow:0 1px 4px #0002}
+.lnk{color:#b3202f;font-weight:600}
