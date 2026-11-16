@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Saha+ · Mental Health SafeSpace</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="card">
+    <h1>Saha+ · SafeSpace</h1>
+    <p class="sub">Record a session of up to 3 minutes (stop whenever you want). Your facial expressions are analysed <b>in your browser</b> to give a mood overview.</p>
+
+    <!-- Step 1: choose mode -->
+    <section class="modes" id="modes">
+      <label><input type="radio" name="mode" value="video" checked /> 🎥 Video</label>
+      <label><input type="radio" name="mode" value="blur" /> 🌫️ Blurred video</label>
+      <label><input type="radio" name="mode" value="voice" /> 🎙️ Voice only</label>
+    </section>
+
+    <label class="prompt-label" for="prompt">Prompt (optional)</label>
+    <input id="prompt" type="text" placeholder="e.g. How was your week?" />
+
+    <!-- Camera stage -->
+    <div class="stage">
+      <video id="video" autoplay muted playsinline></video>
+      <canvas id="blurCanvas" class="hidden"></canvas>
+      <div id="voiceOverlay" class="hidden">🎙️ Voice-only mode<br /><small>Camera is analysed locally, not shown or saved</small></div>
+      <div id="timer">00:00</div>
+    </div>
+
+    <div class="live" id="live">Status: <span id="status">Loading models…</span></div>
+
+    <div class="buttons">
+      <button id="startBtn" disabled>● Start recording</button>
+      <button id="stopBtn" disabled>■ Stop & analyse</button>
+    </div>
+    <div class="progress"><div id="bar"></div></div>
+    <small class="hint">Up to 3 min · stop whenever you want (stops automatically at 3:00)</small>
+
+    <!-- Results -->
+    <section id="results" class="hidden">
+      <h2>Your session overview</h2>
+      <div class="mood-box">
+        <div id="moodEmoji">🙂</div>
+        <div>
+          <div class="mood-title">Dominant mood: <span id="moodName"></span></div>
+          <div id="moodDetail"></div>
+        </div>
+      </div>
+
+      <h3>Expression breakdown</h3>
+      <div id="bars"></div>
+
+      <h3>Wellbeing indicators</h3>
+      <ul id="indicators"></ul>
+
+      <h3>Your recording</h3>
+      <video id="playback" controls playsinline></video>
+      <audio id="playbackAudio" controls class="hidden"></audio>
+      <div class="buttons">
+        <a id="downloadLink" class="btn" download="safespace-session">⬇ Download</a>
+        <button id="sendBtn">📨 Send to therapist</button>
+        <button id="againBtn" class="secondary">↺ New session</button>
+      </div>
+
+      <p class="disclaimer">
+        ⚠️ This tool analyses facial expressions only. It is <b>not a medical test and cannot diagnose any mental illness</b>.
+        Expressions don't always reflect how a person feels. If you feel unwell, please talk to a doctor or therapist.
+        In an emergency in Tunisia, call <b>190</b> (SAMU).
+      </p>
+    </section>
+  </main>
+
+  <!-- face-api.js (runs the AI in the browser) -->
+  <script src="https://cdn.jsdelivr.net/npm/@vladmandic/face-api/dist/face-api.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
